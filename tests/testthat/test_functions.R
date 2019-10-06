@@ -23,4 +23,13 @@ test_that("testing the sparse functions", {
   r0 = Matrix::diag(Matrix::t(A) %*% M %*% Q %*% M %*% B)
   r1 = sparseSandwichTrace(A, M, Q, B, 10, 5)
   expect_true( mean( (r0-r1)^2 ) < 1e-6)
+  
+  
+  A = array(runif(10*5),c(10,5))
+  B = array(runif(5*10),c(5,10))
+
+  r0 = sum(diag( A %*% B))  
+  r1 = denseTraceProd(A,B)  
+  expect_true( mean( (r0-r1)^2 ) < 1e-6)
+  
 })

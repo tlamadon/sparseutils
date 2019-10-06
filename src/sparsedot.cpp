@@ -227,3 +227,18 @@ NumericVector sparseSandwichDiag(S4 L, NumericMatrix M, S4 Q, S4 R, int n, int n
   }
   return D;
 }
+
+// [[Rcpp::export]]
+double denseTraceProd(NumericMatrix A, NumericMatrix B) {
+  double total =0;
+  int ni = A.nrow();
+  int nj = A.ncol();
+  
+  for (int i=0; i<ni; i++) {
+    for (int j=0; j<nj; j++) {
+      total += A(i,j) * B(j,i);
+    }
+  }
+  
+  return total;
+}
