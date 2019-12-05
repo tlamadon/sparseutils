@@ -285,3 +285,29 @@ List paircov(NumericVector A, NumericVector B) {
   return L;
 }
 
+// [[Rcpp::export]]
+List paircov_exclude(NumericVector A, NumericVector B, IntegerVector CA, IntegerVector CB) {
+  double prod =0;
+  double m1   =0;
+  double m2   =0;
+  int    nn   =0;
+  
+  int ni = A.size();
+  int nj = B.size();
+  
+  for (int i=0; i<ni; i++) {
+    for (int j=0; j<nj; j++) {
+      if (CA(i) != CB(j)) {
+        prod += A(i) * B(j);
+        m1   += A(i);
+        m2   += B(j);
+        nn++;
+      }
+    }
+  }
+  
+  List L = List::create(Named("v12") = prod , Named("m1") = m1, Named("m2") = m2, Named("nn") = nn);
+  return L;
+}
+
+

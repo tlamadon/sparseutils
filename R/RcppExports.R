@@ -25,3 +25,7 @@ paircov <- function(A, B) {
     .Call(`_sparseutils_paircov`, A, B)
 }
 
+paircov_exclude <- function(A, B, CA, CB) {
+    .Call(`_sparseutils_paircov_exclude`, A, B, CA, CB)
+}
+

@@ -89,6 +89,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// paircov_exclude
+List paircov_exclude(NumericVector A, NumericVector B, IntegerVector CA, IntegerVector CB);
+RcppExport SEXP _sparseutils_paircov_exclude(SEXP ASEXP, SEXP BSEXP, SEXP CASEXP, SEXP CBSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type A(ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type B(BSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type CA(CASEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type CB(CBSEXP);
+    rcpp_result_gen = Rcpp::wrap(paircov_exclude(A, B, CA, CB));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_sparseutils_sparseDiagCross", (DL_FUNC) &_sparseutils_sparseDiagCross, 4},
@@ -97,6 +111,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sparseutils_sparseSandwichDiag", (DL_FUNC) &_sparseutils_sparseSandwichDiag, 6},
     {"_sparseutils_denseTraceProd", (DL_FUNC) &_sparseutils_denseTraceProd, 2},
     {"_sparseutils_paircov", (DL_FUNC) &_sparseutils_paircov, 2},
+    {"_sparseutils_paircov_exclude", (DL_FUNC) &_sparseutils_paircov_exclude, 4},
     {NULL, NULL, 0}
 };
 
