@@ -77,6 +77,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// paircov
+List paircov(NumericVector A, NumericVector B);
+RcppExport SEXP _sparseutils_paircov(SEXP ASEXP, SEXP BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type A(ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type B(BSEXP);
+    rcpp_result_gen = Rcpp::wrap(paircov(A, B));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_sparseutils_sparseDiagCross", (DL_FUNC) &_sparseutils_sparseDiagCross, 4},
@@ -84,6 +96,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sparseutils_sparseSandwichTrace", (DL_FUNC) &_sparseutils_sparseSandwichTrace, 6},
     {"_sparseutils_sparseSandwichDiag", (DL_FUNC) &_sparseutils_sparseSandwichDiag, 6},
     {"_sparseutils_denseTraceProd", (DL_FUNC) &_sparseutils_denseTraceProd, 2},
+    {"_sparseutils_paircov", (DL_FUNC) &_sparseutils_paircov, 2},
     {NULL, NULL, 0}
 };
 

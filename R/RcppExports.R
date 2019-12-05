@@ -21,3 +21,7 @@ denseTraceProd <- function(A, B) {
     .Call(`_sparseutils_denseTraceProd`, A, B)
 }
 
+paircov <- function(A, B) {
+    .Call(`_sparseutils_paircov`, A, B)
+}
+

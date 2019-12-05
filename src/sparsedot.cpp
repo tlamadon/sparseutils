@@ -242,3 +242,46 @@ double denseTraceProd(NumericMatrix A, NumericMatrix B) {
   
   return total;
 }
+
+
+// accu.moms.pairs <-function(y1,y2,accu) {
+//   if (length(y1)==0) return(accu)
+//     if (length(y2)==0) return(accu)
+//       
+//       if (any(is.na(accu))) {
+//         accu=list(n=0,v12=0,s1=0,s2=0)
+//       }
+//       
+//       for ( i in 1:length(y1)) {
+//         accu$v12  = accu$v12 + sum(y1[i]*y2)
+//         accu$s1   = accu$s1  + y1[i]*length(y2)
+//         accu$s2   = accu$s2  + sum(y2)
+//         accu$n    = accu$n   + length(y2)
+//       }
+//       
+//       return(accu)
+// }
+
+// [[Rcpp::export]]
+List paircov(NumericVector A, NumericVector B) {
+  double prod =0;
+  double m1   =0;
+  double m2   =0;
+  int    nn   =0;
+  
+  int ni = A.size();
+  int nj = B.size();
+  
+  for (int i=0; i<ni; i++) {
+    for (int j=0; j<nj; j++) {
+      prod += A(i) * B(j);
+      m1   += A(i);
+      m2   += B(j);
+      nn++;
+    }
+  }
+  
+  List L = List::create(Named("v12") = prod , Named("m1") = m1, Named("m2") = m2, Named("nn") = nn);
+  return L;
+}
+
